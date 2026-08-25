@@ -4,6 +4,7 @@ Meu primeio jogo, um projeto simples feito em 12 dias na Godot 4
 
 O projeto foi desenvolvido como um exercício de programação e desenvolvimento de jogos, por isso a estrutura e organização dos nodes e do código são notoriamente amadores e sem muito polimento.
 A proposta era trabalhar com um MVP pequeno e um prazo definido, evitando expandir o projeto indefinidamente.
+Este projeto foi inteiramente feito para ser uma versão simples de Vampire Survivors.
 
 
 ## Sobre o Jogo
