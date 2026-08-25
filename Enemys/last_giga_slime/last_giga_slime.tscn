@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://beyngh1g7steg"]
+
+[ext_resource type="PackedScene" uid="uid://wd08krn403wt" path="res://Enemys/giga_slime/giga_slime.tscn" id="1_kd5j0"]
+
+[sub_resource type="Animation" id="Animation_tms8t"]
+resource_name = "HitBoxResize"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox/CollisionShape2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.115, 0.115), Vector2(0.535, 0.535), Vector2(1.44, 1.44), Vector2(0.78, 0.78)]
+}
+
+[sub_resource type="Animation" id="Animation_s8oop"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox/CollisionShape2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8oop"]
+_data = {
+&"HitBoxResize": SubResource("Animation_tms8t"),
+&"RESET": SubResource("Animation_s8oop")
+}
+
+[node name="LastGigaSlime" unique_id=1423727425 groups=["final_boss"] instance=ExtResource("1_kd5j0")]
+scale = Vector2(1.8, 1.8)
+min_spd = 224
+max_spd = 225
+final_boss = true
+
+[node name="Sprite" parent="." index="0" unique_id=902385237]
+modulate = Color(3.5038464, 3.5038464, 3.5038464, 1)
+
+[node name="HurtBox" parent="." index="2" unique_id=1800730513]
+visible = false
+
+[node name="HitBox" parent="." index="3" unique_id=1889988056]
+collision_mask = 5
+_damage = 40.0
+
+[node name="HealthComponent" parent="." index="4" unique_id=939918288]
+_max_health = 8100.0
+
+[node name="DropComponent" parent="." index="5" unique_id=453410317]
+drop_amount = 0
+
+[node name="Animation" type="AnimationPlayer" parent="." index="9" unique_id=793347747]
+libraries/ = SubResource("AnimationLibrary_s8oop")
+autoplay = &"HitBoxResize"
+
+[editable path="HealthComponent/HealthBar"]
+[editable path="HUD_HealthBar"]

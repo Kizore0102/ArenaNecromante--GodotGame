@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bsu2kv0uawbdr"]
+
+[ext_resource type="PackedScene" uid="uid://be6ukkd1laq5o" path="res://HUD/texture_button.tscn" id="1_t76ff"]
+
+[node name="UpgradeDamage" unique_id=100338477 instance=ExtResource("1_t76ff")]
+damage_multiplier = 0.5
+
+[node name="Title" parent="NinePatchRect/ColorRect" parent_id_path=PackedInt32Array(150801910) index="0" unique_id=192938746]
+text = "Damage Up"
+
+[node name="Description" parent="NinePatchRect/ColorRect" parent_id_path=PackedInt32Array(150801910) index="1" unique_id=1412493738]
+text = "Increases damage by 50%"

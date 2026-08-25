@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cjeyxawhg71w7"]
+
+[ext_resource type="Script" uid="uid://iuschgju3yw2" path="res://Scenes/hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://cj3ganbwbf7hp" path="res://Sprites/Entitys_bottom_shadow.png" id="2_64ctp"]
+
+[node name="HUD" type="Control" unique_id=1557876761]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_37p78")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1567920519]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=196380546]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_top = 40.0
+offset_right = 49.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=1085474884]
+position = Vector2(1057, 49.000004)
+scale = Vector2(2.6666641, 7.5)
+texture = ExtResource("2_64ctp")
+
+[node name="LabelTimer" type="Label" parent="CanvasLayer" unique_id=185071350]
+offset_left = 1000.0
+offset_top = 32.0
+offset_right = 1123.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "0.0"
+horizontal_alignment = 1
+
+[node name="MatchWinned" type="Label" parent="CanvasLayer" unique_id=485070368]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -178.0
+offset_right = 61.5
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Match Winned!!!"
+horizontal_alignment = 1

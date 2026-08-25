@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://buak7j7hcoct7"]
+
+[ext_resource type="Script" uid="uid://0awvuysr0e7y" path="res://HUD/game_over.gd" id="1_qrorf"]
+
+[node name="GameOver" type="Control" unique_id=1636116558]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qrorf")
+
+[node name="BackGround" type="ColorRect" parent="." unique_id=1793089193]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.114541, 0.15181446, 0.20342022, 1)
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackGround" unique_id=115847033]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 131.0
+offset_right = 133.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Restart" type="Button" parent="BackGround/VBoxContainer" unique_id=2070678703]
+layout_mode = 2
+text = "Restart	"
+
+[node name="TitleScreen" type="Button" parent="BackGround/VBoxContainer" unique_id=2025654331]
+layout_mode = 2
+text = "Return to Title Screen"
+
+[node name="Quit" type="Button" parent="BackGround/VBoxContainer" unique_id=632923855]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="BackGround" unique_id=1554050583]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -98.0
+offset_right = 217.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 76
+text = "Game Over!"
+
+[connection signal="pressed" from="BackGround/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="BackGround/VBoxContainer/TitleScreen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="BackGround/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

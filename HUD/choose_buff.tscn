@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bh133lylvex8"]
+
+[ext_resource type="PackedScene" uid="uid://be6ukkd1laq5o" path="res://HUD/texture_button.tscn" id="1_akf6o"]
+
+[node name="BackGroundMenu" type="ColorRect" unique_id=505061196]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -303.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+color = Color(0.1, 0.07520001, 0.051999997, 0.4392157)
+
+[node name="OptionSlot" parent="." unique_id=100338477 instance=ExtResource("1_akf6o")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -196.0
+offset_right = 67.5
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2

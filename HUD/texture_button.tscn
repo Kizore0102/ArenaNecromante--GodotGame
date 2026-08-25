@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://be6ukkd1laq5o"]
+
+[ext_resource type="Texture2D" uid="uid://c3nkhm7cpu5qe" path="res://Sprites/projectile_spell.png" id="1_vv8w0"]
+[ext_resource type="Script" uid="uid://bwsrkts6tf3s7" path="res://HUD/texture_button.gd" id="2_4tny0"]
+
+[node name="OptionSlot" type="TextureButton" unique_id=100338477]
+z_index = 10
+custom_minimum_size = Vector2(108, 392)
+offset_right = 135.0
+offset_bottom = 392.0
+scale = Vector2(0.8, 0.8)
+size_flags_vertical = 4
+mouse_filter = 1
+texture_normal = ExtResource("1_vv8w0")
+stretch_mode = 4
+script = ExtResource("2_4tny0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=789755029]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.87499
+offset_top = -51.000015
+offset_right = 66.875
+offset_bottom = 165.24994
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="NinePatchRect" unique_id=150801910]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15686275, 0.14901961, 0.16078432, 1)
+
+[node name="Title" type="Label" parent="NinePatchRect/ColorRect" unique_id=192938746]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "Upgrade name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="NinePatchRect/ColorRect" unique_id=1412493738]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "Upgrade description"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

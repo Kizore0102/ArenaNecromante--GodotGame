@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://hlvyxusrinft"]
+
+[ext_resource type="PackedScene" uid="uid://b0ehma82fpb2k" path="res://Player/projectile_spell.tscn" id="1_r3ye4"]
+[ext_resource type="Texture2D" uid="uid://brf6822u7h1uu" path="res://Sprites/projectile_spell_animation.png" id="2_qsmeq"]
+[ext_resource type="Script" uid="uid://b2rlavq2l7ejg" path="res://components/HitboxComp.gd" id="3_gdbgb"]
+
+[sub_resource type="Animation" id="Animation_hd86d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2xrhi"]
+resource_name = "fired"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j5bqq"]
+_data = {
+&"RESET": SubResource("Animation_hd86d"),
+&"fired": SubResource("Animation_2xrhi")
+}
+
+[sub_resource type="Curve" id="Curve_2yoou"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4784946, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hd86d"]
+curve = SubResource("Curve_2yoou")
+
+[sub_resource type="Curve" id="Curve_hd86d"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 2.5704699), 3.0514534, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2xrhi"]
+curve = SubResource("Curve_hd86d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2yoou"]
+particle_flag_disable_z = true
+velocity_pivot = Vector3(-1, 0, 0)
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+initial_velocity_min = 94.42
+initial_velocity_max = 167.39
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_hd86d")
+scale_over_velocity_curve = SubResource("CurveTexture_2xrhi")
+color = Color(0.12156863, 0.101960786, 0.11764706, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yoou"]
+radius = 17.0
+
+[node name="DoubleShoot" unique_id=75274419 instance=ExtResource("1_r3ye4")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=258277356]
+position = Vector2(-1, 14)
+
+[node name="GPUParticles2D" parent="." index="3" unique_id=1095652039]
+position = Vector2(10, 14)
+
+[node name="HitBox" parent="." index="4" unique_id=2054667035]
+position = Vector2(0, 14)
+
+[node name="SecondShoot" type="Node2D" parent="." index="5" unique_id=544073457]
+
+[node name="Sprite2D" type="Sprite2D" parent="SecondShoot" index="0" unique_id=1881105018]
+position = Vector2(0, -14)
+texture = ExtResource("2_qsmeq")
+hframes = 4
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="SecondShoot" index="1" unique_id=1140053804]
+visible = false
+position = Vector2(-121, 0)
+rect = Rect2(-324, -18, 497, 36)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SecondShoot" index="2" unique_id=1857855056]
+libraries/ = SubResource("AnimationLibrary_j5bqq")
+autoplay = &"fired"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SecondShoot" index="3" unique_id=1024327944]
+position = Vector2(10, -15)
+amount = 80
+sub_emitter = NodePath(".")
+process_material = SubResource("ParticleProcessMaterial_2yoou")
+
+[node name="HitBox" type="Area2D" parent="SecondShoot" index="4" unique_id=1925746934]
+position = Vector2(0, -14)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_gdbgb")
+AttackerClass = "player"
+_damage = 20.0
+metadata/_custom_type_script = "uid://b2rlavq2l7ejg"
+
+[node name="Collision" type="CollisionShape2D" parent="SecondShoot/HitBox" index="0" unique_id=1092763173]
+position = Vector2(10, -1)
+shape = SubResource("CircleShape2D_2yoou")
+
+[connection signal="_hit_connected" from="SecondShoot/HitBox" to="." method="explosion"]
+[connection signal="area_entered" from="SecondShoot/HitBox" to="SecondShoot/HitBox" method="_on_area_entered"]

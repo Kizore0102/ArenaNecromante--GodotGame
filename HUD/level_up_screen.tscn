@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://deoji5x5186as"]
+
+[ext_resource type="Script" uid="uid://bsh4rxhyrcitu" path="res://Scenes/level_up_screen.gd" id="1_8001c"]
+[ext_resource type="PackedScene" uid="uid://bsu2kv0uawbdr" path="res://HUD/UpgradesButtons/upgrade_damage.tscn" id="2_w3tan"]
+[ext_resource type="PackedScene" uid="uid://7aijkpq64lch" path="res://HUD/UpgradesButtons/upgrade_speed.tscn" id="3_nekxy"]
+[ext_resource type="PackedScene" uid="uid://bl6q25vcont0x" path="res://HUD/UpgradesButtons/upgrade_cooldown.tscn" id="5_e70vk"]
+
+[node name="LevelUpScreen" type="HBoxContainer" unique_id=1307222354]
+process_mode = 3
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 33.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 30
+script = ExtResource("1_8001c")
+BuffOptions = Array[PackedScene]([ExtResource("2_w3tan"), ExtResource("3_nekxy"), ExtResource("5_e70vk")])

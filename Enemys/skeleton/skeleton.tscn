@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bv2u15ums8843"]
+
+[ext_resource type="Texture2D" uid="uid://b506w05gqulf3" path="res://Enemys/skeleton/Enemy_skeleton.png" id="1_8mnlo"]
+[ext_resource type="Script" uid="uid://h2lrlbvldf3n" path="res://Enemys/skeleton/skeleton.gd" id="1_8txbg"]
+[ext_resource type="Script" uid="uid://xdkospe86aku" path="res://components/HurtboxComp.gd" id="3_0mqt2"]
+[ext_resource type="Script" uid="uid://b2rlavq2l7ejg" path="res://components/HitboxComp.gd" id="4_kvxk1"]
+[ext_resource type="Script" uid="uid://dt5m2n83mfpcp" path="res://components/HealthComp.gd" id="5_fo6pm"]
+[ext_resource type="PackedScene" uid="uid://cm5b8v6tee1fc" path="res://HUD/health_bar.tscn" id="6_dv6bo"]
+[ext_resource type="Texture2D" uid="uid://cj3ganbwbf7hp" path="res://Sprites/Entitys_bottom_shadow.png" id="7_itpgw"]
+[ext_resource type="Script" uid="uid://c4ui5yxasmt5x" path="res://components/ExpManager.gd" id="8_dv6bo"]
+[ext_resource type="Script" uid="uid://56ykqrqgf8vx" path="res://Player/label.gd" id="9_uvjbl"]
+[ext_resource type="Script" uid="uid://bvo2o41ifp066" path="res://components/Drops.gd" id="10_fyyhx"]
+[ext_resource type="PackedScene" uid="uid://o24atowk110o" path="res://Enemys/exp_gem.tscn" id="11_qpvk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8txbg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0mqt2"]
+radius = 20.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_itpgw"]
+radius = 17.029387
+
+[node name="Skeleton" type="CharacterBody2D" unique_id=637660815 groups=["enemy", "spawned_enemy"]]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_8txbg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1865018143]
+texture = ExtResource("1_8mnlo")
+
+[node name="PhysicalCollision" type="CollisionShape2D" parent="." unique_id=3824040]
+position = Vector2(2, 8)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_8txbg")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1038890928 node_paths=PackedStringArray("_health")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_0mqt2")
+AttackerClass = "enemy"
+_health = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://xdkospe86aku"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1555495353]
+position = Vector2(4, 2)
+shape = SubResource("CapsuleShape2D_0mqt2")
+debug_color = Color(0.9607843, 0.2, 0, 0.18431373)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=2077187034]
+collision_layer = 4
+script = ExtResource("4_kvxk1")
+_damage = 10.0
+metadata/_custom_type_script = "uid://b2rlavq2l7ejg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1131680748]
+position = Vector2(4, 2)
+shape = SubResource("CircleShape2D_itpgw")
+debug_color = Color(0.09274656, 0.12531984, 0.1464802, 0.41960785)
+
+[node name="ExpManager" type="Node" parent="." unique_id=377545827 node_paths=PackedStringArray("health_component")]
+script = ExtResource("8_dv6bo")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://c4ui5yxasmt5x"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=91137848 node_paths=PackedStringArray("drop_component")]
+script = ExtResource("5_fo6pm")
+drop_component = NodePath("../DropComponent")
+_max_health = 120.0
+metadata/_custom_type_script = "uid://dt5m2n83mfpcp"
+
+[node name="HealthBar" parent="HealthComponent" unique_id=216181259 instance=ExtResource("6_dv6bo")]
+offset_left = -35.0
+offset_top = -36.0
+offset_right = 35.0
+offset_bottom = -29.0
+
+[node name="BottomShadow" type="Sprite2D" parent="." unique_id=1704834096]
+z_index = -1
+position = Vector2(0, 24)
+texture = ExtResource("7_itpgw")
+
+[node name="Hp" type="Label" parent="." unique_id=1247732767 node_paths=PackedStringArray("health_component")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("9_uvjbl")
+health_component = NodePath("../HealthComponent")
+
+[node name="DropComponent" type="Node" parent="." unique_id=362870258]
+script = ExtResource("10_fyyhx")
+PossibleDrops = Array[PackedScene]([ExtResource("11_qpvk3")])
+drop_amount = 4
+metadata/_custom_type_script = "uid://bvo2o41ifp066"
+
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]

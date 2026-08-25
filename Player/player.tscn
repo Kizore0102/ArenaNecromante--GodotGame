@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://qc3x1smc1si3"]
+
+[ext_resource type="Script" uid="uid://cxeojsayys641" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://r060y0edymv7" path="res://Player/vampire witch.png" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://c3nkhm7cpu5qe" path="res://Sprites/projectile_spell.png" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://bcbg444chrs6q" path="res://Player/shooter.gd" id="3_gwnis"]
+[ext_resource type="Script" uid="uid://dt5m2n83mfpcp" path="res://components/HealthComp.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://xdkospe86aku" path="res://components/HurtboxComp.gd" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://56ykqrqgf8vx" path="res://Player/label.gd" id="7_vtle1"]
+[ext_resource type="Texture2D" uid="uid://cj3ganbwbf7hp" path="res://Sprites/Entitys_bottom_shadow.png" id="8_od3ui"]
+[ext_resource type="Script" uid="uid://c4ui5yxasmt5x" path="res://components/ExpManager.gd" id="9_00tjw"]
+[ext_resource type="PackedScene" uid="uid://cm5b8v6tee1fc" path="res://HUD/health_bar.tscn" id="10_x3vf3"]
+[ext_resource type="PackedScene" uid="uid://dy82aiws62bnd" path="res://HUD/hud_health_bar.tscn" id="11_apopc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apopc"]
+size = Vector2(10, 12)
+
+[sub_resource type="AudioStream" id="AudioStream_apopc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53q1"]
+radius = 9.0
+height = 22.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3vf3"]
+bg_color = Color(0, 0.59052616, 0.35956618, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apopc"]
+bg_color = Color(0.11759999, 0.76776004, 0.84, 1)
+
+[node name="player" type="CharacterBody2D" unique_id=1789549492 node_paths=PackedStringArray("_sprite", "shoot_cooldown") groups=["player"]]
+z_index = 2
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_4ntmi")
+_sprite = NodePath("sprite")
+shoot_cooldown = NodePath("Shooter/shoot_cooldown")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1381877982]
+texture = ExtResource("1_l8h54")
+
+[node name="PhysicalCollision" type="CollisionShape2D" parent="." unique_id=384742154]
+position = Vector2(1, 8)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_apopc")
+
+[node name="Shooter" type="Node2D" parent="." unique_id=1831246039 node_paths=PackedStringArray("_timer", "shooter", "bullet_spawn")]
+script = ExtResource("3_gwnis")
+_timer = NodePath("shoot_cooldown")
+shooter = NodePath(".")
+bullet_spawn = NodePath("BulletSpawn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shooter" unique_id=340749580]
+modulate = Color(0, 0.903165, 0.94015616, 1)
+position = Vector2(46, 0)
+scale = Vector2(2.5, 0.625)
+texture = ExtResource("3_btcbx")
+
+[node name="shoot_cooldown" type="Timer" parent="Shooter" unique_id=1677545741]
+wait_time = 0.4
+
+[node name="BulletSpawn" type="Marker2D" parent="Shooter" unique_id=1550881157]
+position = Vector2(32, 0)
+
+[node name="shoot_sound" type="AudioStreamPlayer2D" parent="Shooter" unique_id=777440470]
+stream = SubResource("AudioStream_apopc")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=560634486 node_paths=PackedStringArray("_health")]
+collision_mask = 4
+script = ExtResource("6_fhl08")
+_health = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://xdkospe86aku"
+
+[node name="Collision" type="CollisionShape2D" parent="HurtBox" unique_id=903001042]
+position = Vector2(1, 7)
+shape = SubResource("CapsuleShape2D_k53q1")
+debug_color = Color(0.66952527, 0.5102039, 1.92523e-07, 0.41960785)
+
+[node name="BottomShadow" type="Sprite2D" parent="." unique_id=94300674]
+position = Vector2(-1, 25)
+texture = ExtResource("8_od3ui")
+
+[node name="ExpManager" type="Node" parent="." unique_id=1492795290 node_paths=PackedStringArray("health_component")]
+script = ExtResource("9_00tjw")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://c4ui5yxasmt5x"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=621962497]
+script = ExtResource("5_k53q1")
+metadata/_custom_type_script = "uid://dt5m2n83mfpcp"
+
+[node name="HealthBar" parent="HealthComponent" unique_id=216181259 instance=ExtResource("10_x3vf3")]
+visible = false
+offset_left = -30.0
+offset_top = -49.0
+offset_right = 40.0
+offset_bottom = -42.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_x3vf3")
+value = 21.38
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=226238240]
+
+[node name="HP" type="Label" parent="CanvasLayer" unique_id=1622130185]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 39.0
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="EXP" type="Label" parent="CanvasLayer" unique_id=1248486611]
+offset_left = 16.0
+offset_top = 46.0
+offset_right = 56.0
+offset_bottom = 69.0
+text = "EXP"
+horizontal_alignment = 1
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HUD_HealthBar" parent="CanvasLayer" unique_id=559692001 instance=ExtResource("11_apopc")]
+offset_left = 56.0
+offset_top = 22.0
+offset_right = 398.0
+offset_bottom = 35.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HUD_ExpBar" parent="CanvasLayer" unique_id=878264498 instance=ExtResource("11_apopc")]
+anchors_preset = -1
+anchor_right = 0.0052083335
+offset_left = 56.0
+offset_top = 54.0
+offset_right = 392.0
+offset_bottom = 62.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_apopc")
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_Number" type="Label" parent="CanvasLayer" unique_id=1596405593 node_paths=PackedStringArray("player", "health_component")]
+offset_left = 424.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 39.0
+text = "---"
+horizontal_alignment = 1
+script = ExtResource("7_vtle1")
+player = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
+metadata/_edit_use_anchors_ = true
+
+[node name="levelLabel" type="Label" parent="CanvasLayer" unique_id=1331789267 node_paths=PackedStringArray("player")]
+offset_left = 424.0
+offset_top = 48.0
+offset_right = 464.0
+offset_bottom = 71.0
+text = "---"
+horizontal_alignment = 1
+script = ExtResource("7_vtle1")
+player = NodePath("../..")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="Shooter/shoot_cooldown" to="Shooter" method="_on_timer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]

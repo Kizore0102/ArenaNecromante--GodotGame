@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dwtdu04vt2mbm"]
+
+[ext_resource type="PackedScene" uid="uid://buak7j7hcoct7" path="res://HUD/game_over.tscn" id="1_fpttc"]
+[ext_resource type="Texture2D" uid="uid://r060y0edymv7" path="res://Player/vampire witch.png" id="2_qjoe0"]
+[ext_resource type="Texture2D" uid="uid://brf6822u7h1uu" path="res://Sprites/projectile_spell_animation.png" id="3_xouh0"]
+[ext_resource type="Texture2D" uid="uid://datv1dsqoxq6d" path="res://Sprites/GigaSlimeIcon.png" id="4_gvplx"]
+
+[node name="GameOver" unique_id=1636116558 instance=ExtResource("1_fpttc")]
+
+[node name="BackGround" parent="." index="0" unique_id=1793089193]
+color = Color(0.053502776, 0.27217433, 0.33130404, 1)
+
+[node name="VBoxContainer" parent="BackGround" index="0" unique_id=115847033]
+offset_top = 234.0
+offset_bottom = 335.0
+
+[node name="Restart" parent="BackGround/VBoxContainer" index="0" unique_id=2070678703]
+visible = false
+
+[node name="Quit" parent="BackGround/VBoxContainer" index="2" unique_id=632923855]
+visible = false
+
+[node name="Label" parent="BackGround" index="1" unique_id=1554050583]
+offset_left = -216.0
+offset_top = -92.0
+offset_right = 218.0
+offset_bottom = 13.0
+text = "You  Won!!!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="BackGround" index="2" unique_id=26534926]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 85.0
+offset_right = 133.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Congratulations
+You finished the game!"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="BackGround" index="3" unique_id=961898468]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 143.0
+offset_right = 133.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "It was just a short game maded in 12 days, but im very happy to se you on this screen
+thank you so much for play my first game!"
+horizontal_alignment = 1
+
+[node name="vampire witch" type="Sprite2D" parent="." index="1" unique_id=596957519]
+position = Vector2(264, 280)
+texture = ExtResource("2_qjoe0")
+
+[node name="vampire witch2" type="Sprite2D" parent="." index="2" unique_id=1290407475]
+position = Vector2(888, 280)
+texture = ExtResource("2_qjoe0")
+flip_h = true
+
+[node name="Magic" type="Sprite2D" parent="." index="3" unique_id=1985740763]
+position = Vector2(840, 208)
+rotation = -2.0943952
+texture = ExtResource("3_xouh0")
+hframes = 4
+
+[node name="Magic2" type="Sprite2D" parent="." index="4" unique_id=1771537867]
+position = Vector2(336.00003, 200)
+rotation = -0.7853982
+texture = ExtResource("3_xouh0")
+hframes = 4
+
+[node name="Slime Chan" type="Sprite2D" parent="." index="5" unique_id=1245138352]
+position = Vector2(968, 480)
+texture = ExtResource("4_gvplx")

@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://wd08krn403wt"]
+
+[ext_resource type="Script" uid="uid://4e51iaufw7px" path="res://Enemys/giga_slime/giga_slime.gd" id="1_8ervj"]
+[ext_resource type="Texture2D" uid="uid://bcpae6aadoq7v" path="res://Enemys/giga_slime/Enemy_GigaSlime.png" id="2_6bbrp"]
+[ext_resource type="Script" uid="uid://xdkospe86aku" path="res://components/HurtboxComp.gd" id="2_e1tb2"]
+[ext_resource type="Script" uid="uid://b2rlavq2l7ejg" path="res://components/HitboxComp.gd" id="3_xbdyl"]
+[ext_resource type="Script" uid="uid://dt5m2n83mfpcp" path="res://components/HealthComp.gd" id="4_xbdyl"]
+[ext_resource type="PackedScene" uid="uid://cm5b8v6tee1fc" path="res://HUD/health_bar.tscn" id="6_v6nfm"]
+[ext_resource type="Script" uid="uid://bvo2o41ifp066" path="res://components/Drops.gd" id="7_v6nfm"]
+[ext_resource type="PackedScene" uid="uid://o24atowk110o" path="res://Enemys/exp_gem.tscn" id="8_ajlmh"]
+[ext_resource type="Script" uid="uid://56ykqrqgf8vx" path="res://Player/label.gd" id="9_ajlmh"]
+[ext_resource type="PackedScene" uid="uid://dy82aiws62bnd" path="res://HUD/hud_health_bar.tscn" id="10_30a2e"]
+[ext_resource type="Texture2D" uid="uid://cj3ganbwbf7hp" path="res://Sprites/Entitys_bottom_shadow.png" id="11_jy3gf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6bbrp"]
+radius = 20.0
+height = 47.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bbrp"]
+radius = 38.052597
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_loq2u"]
+radius = 26.79967
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30a2e"]
+bg_color = Color(0.92131877, 0, 0.19405463, 1)
+
+[node name="GigaSlime" type="CharacterBody2D" unique_id=1423727425 groups=["enemy", "spawned_enemy"]]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_8ervj")
+min_spd = 150
+max_spd = 160
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=902385237]
+position = Vector2(0, -25)
+texture = ExtResource("2_6bbrp")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1373136186]
+position = Vector2(0, -10.5)
+shape = SubResource("CapsuleShape2D_6bbrp")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1800730513 node_paths=PackedStringArray("_health")]
+collision_layer = 4
+script = ExtResource("2_e1tb2")
+_health = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://xdkospe86aku"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1295929459]
+position = Vector2(0, -20)
+shape = SubResource("CircleShape2D_6bbrp")
+debug_color = Color(0.5215879, 0.3504844, 0.17728585, 0.41960785)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1889988056]
+collision_layer = 4
+script = ExtResource("3_xbdyl")
+_damage = 70.0
+metadata/_custom_type_script = "uid://b2rlavq2l7ejg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2063181165]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_loq2u")
+debug_color = Color(6.317161e-08, 0.08135677, 0.102582805, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=939918288 node_paths=PackedStringArray("drop_component")]
+script = ExtResource("4_xbdyl")
+drop_component = NodePath("../DropComponent")
+_max_health = 3500.0
+metadata/_custom_type_script = "uid://dt5m2n83mfpcp"
+
+[node name="HealthBar" parent="HealthComponent" unique_id=216181259 instance=ExtResource("6_v6nfm")]
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 38.0
+offset_bottom = -73.0
+
+[node name="DropComponent" type="Node" parent="." unique_id=453410317]
+script = ExtResource("7_v6nfm")
+PossibleDrops = Array[PackedScene]([ExtResource("8_ajlmh")])
+drop_amount = 32
+metadata/_custom_type_script = "uid://bvo2o41ifp066"
+
+[node name="Hp" type="Label" parent="." unique_id=1184224043 node_paths=PackedStringArray("health_component")]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("9_ajlmh")
+health_component = NodePath("../HealthComponent")
+
+[node name="HUD_HealthBar" parent="." unique_id=1836234658 instance=ExtResource("10_30a2e")]
+visible = false
+offset_left = -35.0
+offset_top = -80.0
+offset_right = 35.0
+offset_bottom = -73.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_30a2e")
+
+[node name="BottomShadow" type="Sprite2D" parent="." unique_id=672149097]
+z_index = -1
+position = Vector2(-3, 15.000001)
+scale = Vector2(3, 3.5)
+texture = ExtResource("11_jy3gf")
+
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
+
+[editable path="HealthComponent/HealthBar"]
+[editable path="HUD_HealthBar"]

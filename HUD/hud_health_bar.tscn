@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dy82aiws62bnd"]
+
+[ext_resource type="PackedScene" uid="uid://cm5b8v6tee1fc" path="res://HUD/health_bar.tscn" id="1_42sky"]
+[ext_resource type="Script" uid="uid://cmw7phqg64l1m" path="res://HUD/hud_health_bar.gd" id="2_yqwu8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqwu8"]
+bg_color = Color(0, 0.5897508, 0.3696099, 1)
+
+[node name="HUD_HealthBar" unique_id=216181259 instance=ExtResource("1_42sky")]
+theme_override_styles/fill = SubResource("StyleBoxFlat_yqwu8")
+script = ExtResource("2_yqwu8")

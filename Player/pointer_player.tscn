@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://3f5lsl66idky"]
+
+[ext_resource type="Script" uid="uid://dvmpphl2ecqhl" path="res://Player/pointer_player.gd" id="1_icg1m"]
+[ext_resource type="Texture2D" uid="uid://bvkh3ksg4svyy" path="res://Sprites/pointer_icon.png" id="2_b0yj7"]
+
+[node name="pointer" type="Marker2D" unique_id=425529114]
+script = ExtResource("1_icg1m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=733112577]
+texture = ExtResource("2_b0yj7")

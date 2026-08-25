@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://q4tvfysqen2j"]
+
+[ext_resource type="PackedScene" uid="uid://bv2u15ums8843" path="res://Enemys/skeleton/skeleton.tscn" id="1_wv0ce"]
+
+[node name="SkeletonPurple" unique_id=637660815 instance=ExtResource("1_wv0ce")]
+min_spd = 120
+max_spd = 260
+
+[node name="Sprite2D" parent="." index="0" unique_id=1865018143]
+modulate = Color(1.1255248, 0.7414765, 1.4643909, 1)
+
+[node name="HitBox" parent="." index="3" unique_id=2077187034]
+_damage = 22.0
+
+[node name="HealthComponent" parent="." index="5" unique_id=91137848 groups=["enemy"]]
+_max_health = 250.0
+
+[node name="DropComponent" parent="." index="8" unique_id=362870258]
+drop_amount = 8
